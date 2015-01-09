@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="column">
+<div class="medium-6 column">
   <h1>Create a new message</h1>
   {{Form::open(['route' => 'messages.store'])}}
     <!-- Subject Form Input -->

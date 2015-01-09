@@ -4,7 +4,12 @@ use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Thread;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 
 class MessagesController extends \BaseController {
 
@@ -14,7 +19,7 @@ class MessagesController extends \BaseController {
    */
   public function __construct()
   {
-      $user = User::find(1);
+      $user = User::find(2);
       Auth::login($user);
   }
 
@@ -43,7 +48,13 @@ class MessagesController extends \BaseController {
    */
   public function show($id)
   {
-      $thread = Thread::findOrFail($id);
+      try {
+          $thread = Thread::findOrFail($id);
+      } catch (ModelNotFoundException $e) {
+          Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+
+          return Redirect::to('messages');
+      }
       // show current user in list if not a current participant
       //$users = User::whereNotIn('id', $thread->participantsUserIds())->get();
       // don't show the current user in list
@@ -62,7 +73,8 @@ class MessagesController extends \BaseController {
   public function create()
   {
       $users = User::where('id', '!=', Auth::id())->get();
-      return View::make('messenger.create', compact('users'));  }
+      return View::make('messenger.create', compact('users'));
+  }
 
 
 	/**

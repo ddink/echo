@@ -4,4 +4,4 @@ I've added Foundation CSS and JS into the public folder to provide a starting po
 
 ## Documentation
 
-There are only two routes in the application. '/' is the index route. It will take you to the laravel hello view. '/console' is the console route, and it will take you to the console. There are messages routes, but they're still in dev so 'messages/$id' will throw an error.
+There are routes to the application's two main functionalities. `/` is the index route. It will take you to the laravel hello view. `/console` is the console route, and it will take you to the console. There are also routes for the messages, `/messages`; `/messages/create` takes you to the message creation route; `/messages/{id}` takes you to message's show page, which will display the entire thread of messages.

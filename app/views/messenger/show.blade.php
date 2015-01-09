@@ -17,25 +17,31 @@
             </div>
         @endforeach
 
-        <h2>Add a new message</h2>
-        {{Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT'])}}
-        <!-- Message Form Input -->
-        <div class="form-group">
-            {{ Form::textarea('message', null, ['class' => 'form-control']) }}
+        <br />
+        <div class="row">
+          <div class="medium-6 column">
+            <h3>Add a new message</h3>
+            {{Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT'])}}
+            <!-- Message Form Input -->
+            <div class="form-group">
+                {{ Form::textarea('message', null, ['class' => 'form-control']) }}
+            </div>
+
+            @if($users->count() > 0)
+            <div class="checkbox">
+                @foreach($users as $user)
+                    <label title="{{$user->first_name}} {{$user->last_name}}"><input type="checkbox" name="recipients[]" value="{{$user->id}}">{{$user->first_name}}</label>
+                @endforeach
+            </div>
+            @endif
+
+            <!-- Submit Form Input -->
+            <div class="form-group">
+                {{ Form::submit('Submit', ['class' => 'button']) }}
+            </div>
+            {{Form::close()}}
+          </div>
         </div>
 
-        @if($users->count() > 0)
-        <div class="checkbox">
-            @foreach($users as $user)
-                <label title="{{$user->first_name}} {{$user->last_name}}"><input type="checkbox" name="recipients[]" value="{{$user->id}}">{{$user->first_name}}</label>
-            @endforeach
-        </div>
-        @endif
-
-        <!-- Submit Form Input -->
-        <div class="form-group">
-            {{ Form::submit('Submit', ['class' => 'btn btn-primary form-control']) }}
-        </div>
-        {{Form::close()}}
     </div>
 @stop
