@@ -1,6 +1,6 @@
 ## Work In Progress
 
-I've added Foundation CSS and JS into the public folder to provide a starting point on the front-end. I've also added the laravel-console, monolog packages, and the code sniffer and faker packages in dev. I plan to complete the integration of the app's main functionality (messaging). After that I'll add some user authentication.
+I've added Foundation CSS and JS into the public folder to provide a starting point on the front-end. I've also added the laravel-console, laravel-messenger, monolog packages, and the code sniffer and faker packages in dev. The last thing on my check-list is to add some user authentication.
 
 ## Documentation
 
